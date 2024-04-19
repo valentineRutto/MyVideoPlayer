@@ -10,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.valentinerutto.myvideoplayer.ui.VideoPlayerExoCompossable
 import com.valentinerutto.myvideoplayer.ui.theme.MyVideoPlayerTheme
 
 class MainActivity : ComponentActivity() {
@@ -23,6 +24,10 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     Greeting("Android")
+                   // val url ="https://vz-56631916-b83.b-cdn.net/e4927a9c-5717-46ac-bbfa-136b4de9a572/playlist.m3u8"
+                    val url = "https://vz-56631916-b83.b-cdn.net/e4927a9c-5717-46ac-bbfa-136b4de9a572/play_720p.mp4"
+                    VideoPlayerExoCompossable(videoUrl = url)
+                            
                 }
             }
         }
