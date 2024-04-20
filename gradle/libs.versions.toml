@@ -2,7 +2,7 @@
 agp = "8.3.2"
 coilCompose = "2.6.0"
 coreTesting = "2.2.0"
-junitJunit = "4.12"
+junitJunit = "4.13.2"
 junitJupiter = "5.8.1"
 koinTest = "3.1.2"
 kotlin = "1.9.0"
