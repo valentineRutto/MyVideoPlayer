@@ -82,9 +82,3 @@ fun ImageComposable() {
         contentDescription = "play",
     )
 }
-
-@Preview(name = "VideoListScreen")
-@Composable
-private fun PreviewVideoListScreen() {
-    //VideoListScreen()
-}

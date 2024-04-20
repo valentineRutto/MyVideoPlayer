@@ -33,9 +33,7 @@ object RetrofitClient {
     fun accessKeyInterceptor(accessKey: String): Interceptor {
         return Interceptor { chain ->
             intercept(chain, accessKey)
-
         }
-
     }
 
     fun intercept(chain: Interceptor.Chain, accessKey: String): okhttp3.Response {

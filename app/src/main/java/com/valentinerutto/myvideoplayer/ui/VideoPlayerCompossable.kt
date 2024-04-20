@@ -1,11 +1,22 @@
 package com.valentinerutto.myvideoplayer.ui
 
+import android.content.Context
+import android.content.Intent
 import androidx.annotation.OptIn
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Face
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Share
+import androidx.compose.material.icons.filled.ThumbUp
+import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -20,6 +31,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.media3.common.MediaItem
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.datasource.DataSource
@@ -82,6 +94,8 @@ fun VideoPlayerExoCompossable(
             style = MaterialTheme.typography.bodyMedium
         )
 
+        Share(context = context,videoUrl)
+
         AndroidView(modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
@@ -89,6 +103,43 @@ fun VideoPlayerExoCompossable(
             factory = {
                 playerView
             })
+
+
     }
 
+}
+
+@Composable
+fun Share(context: Context,videourl:String) {
+
+    val sendIntent = Intent(Intent.ACTION_SEND).apply {
+        putExtra(Intent.EXTRA_TEXT, videourl)
+        type = "text/plain"
+    }
+
+    val shareIntent = Intent.createChooser(sendIntent, null)
+    Row {
+
+
+        Button(onClick = {
+
+
+        }) {
+            Icon(imageVector = Icons.Filled.ThumbUp, contentDescription = null)
+            Text("like", modifier = Modifier.padding(start = 8.dp))
+        }
+        Button(onClick = {
+
+        }) {
+            Icon(imageVector = Icons.Filled.Close, contentDescription = null)
+            Text("dislike", modifier = Modifier.padding(start = 8.dp))
+        }
+
+        Button(onClick = {
+            startActivity(context, shareIntent, null)
+        }) {
+            Icon(imageVector = Icons.Filled.Share, contentDescription = null)
+            Text("Share", modifier = Modifier.padding(start = 8.dp))
+        }
+    }
 }
