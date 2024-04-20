@@ -14,8 +14,6 @@ basic but intuitive interface for users to browse, watch, and interact with vide
 **Dependeny Injection:** Koin
 
 
-
-
 ## Installation
 Run the project with android studio and install on android device or emulator running from 24 to 34 sdk
 
@@ -48,3 +46,11 @@ The folders are split into 4 boundaries:
 
     This is where common methods and classes are kept for reusability
 
+
+
+## Screenshots
+
+![listpage.png](app%2Fsrc%2Fmain%2Fres%2Fdrawable%2Flistpage.png)
+![playerpage.png](app%2Fsrc%2Fmain%2Fres%2Fdrawable%2Fplayerpage.png)
+![sharepage.png](app%2Fsrc%2Fmain%2Fres%2Fdrawable%2Fsharepage.png)
+[Screen_recording_20240421_013609.webm](app%2Fsrc%2Fmain%2Fres%2FScreen_recording_20240421_013609.webm)
