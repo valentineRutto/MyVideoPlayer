@@ -3,6 +3,7 @@ package com.valentinerutto.myvideoplayer.ui
 import android.content.Context
 import android.content.Intent
 import androidx.annotation.OptIn
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,11 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.Face
-import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Share
-import androidx.compose.material.icons.filled.ThumbUp
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -85,6 +82,7 @@ fun VideoPlayerExoCompossable(
     }
 
 
+
     Column(modifier = Modifier.fillMaxSize()) {
 
         Text(
@@ -93,8 +91,7 @@ fun VideoPlayerExoCompossable(
             modifier = modifier,
             style = MaterialTheme.typography.bodyMedium
         )
-
-        Share(context = context,videoUrl)
+        Share(context = context, videoUrl)
 
         AndroidView(modifier = Modifier
             .fillMaxWidth()
@@ -110,7 +107,7 @@ fun VideoPlayerExoCompossable(
 }
 
 @Composable
-fun Share(context: Context,videourl:String) {
+fun Share(context: Context, videourl: String) {
 
     val sendIntent = Intent(Intent.ACTION_SEND).apply {
         putExtra(Intent.EXTRA_TEXT, videourl)
@@ -118,22 +115,8 @@ fun Share(context: Context,videourl:String) {
     }
 
     val shareIntent = Intent.createChooser(sendIntent, null)
-    Row {
 
-
-        Button(onClick = {
-
-
-        }) {
-            Icon(imageVector = Icons.Filled.ThumbUp, contentDescription = null)
-            Text("like", modifier = Modifier.padding(start = 8.dp))
-        }
-        Button(onClick = {
-
-        }) {
-            Icon(imageVector = Icons.Filled.Close, contentDescription = null)
-            Text("dislike", modifier = Modifier.padding(start = 8.dp))
-        }
+    Row(horizontalArrangement = Arrangement.End) {
 
         Button(onClick = {
             startActivity(context, shareIntent, null)
