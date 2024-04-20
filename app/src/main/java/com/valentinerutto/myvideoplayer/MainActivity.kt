@@ -4,15 +4,23 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.lifecycleScope
-import com.valentinerutto.myvideoplayer.ui.VideoListScreen
+import androidx.navigation.compose.rememberNavController
+import com.valentinerutto.myvideoplayer.ui.MyAppBar
 import com.valentinerutto.myvideoplayer.ui.VideoViewModel
+import com.valentinerutto.myvideoplayer.ui.navigation.NavGraph
 import com.valentinerutto.myvideoplayer.ui.theme.MyVideoPlayerTheme
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -26,6 +34,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -34,16 +43,39 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background
                 ) {
-                    val videosList = viewmodel.videos.value
+                    val navController = rememberNavController()
+                    val uiState = viewmodel.state.collectAsState()
+                    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
-                    VideoListScreen(list = videosList)
+                    Scaffold(modifier = Modifier
+                        .fillMaxSize()
+                        .nestedScroll(scrollBehavior.nestedScrollConnection), topBar = {
 
-                    // val url ="https://vz-56631916-b83.b-cdn.net/e4927a9c-5717-46ac-bbfa-136b4de9a572/playlist.m3u8"
-                    val url =
-                        "https://vz-56631916-b83.b-cdn.net/e4927a9c-5717-46ac-bbfa-136b4de9a572/play_720p.mp4"
-                    //  VideoPlayerExoCompossable(videoUrl = url)
+                        MyAppBar(navController = navController, scrollBehavior)
 
+                    },
+
+//                        , floatingActionButton = {
+//                        IconButton(onClick = {
+//                            scope.launch {
+//                                viewmodel.refreshData()
+//                            }
+//
+//                        }) {
+//                            Icon(Icons.Filled.Refresh, contentDescription = "Refresh")
+//                        }
+//
+//                    },
+                        content = {
+
+                            NavGraph(
+                                navController = navController,
+                                modifier = Modifier.padding(it),
+                                uiState = uiState.value
+                            )
+                        })
                 }
+
             }
         }
     }

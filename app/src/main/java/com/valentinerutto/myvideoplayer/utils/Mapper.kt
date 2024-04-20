@@ -7,7 +7,8 @@ fun mapResponseToVideo(response: VideosListResponse): List<Video> {
     return response.items!!.map {
 
         Video(
-            guid = it?.guid!!,
+            videoLibraryId = it?.videoLibraryId!!,
+            guid = it.guid!!,
             title = it.title!!,
             thumbnail = it.thumbnailFileName!!,
             views = it.views!!,
